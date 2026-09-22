@@ -2,10 +2,14 @@
 
 Turn a browser or proxy HAR capture into a short inventory of API deprecation and shutdown signals.
 
+## Run from GitHub
+
 ```sh
-har-sunset-audit traffic.har
-har-sunset-audit traffic.har --now 2026-10-01 --json
+npx --yes github:b69ca/har-sunset-audit traffic.har
+npx --yes github:b69ca/har-sunset-audit traffic.har --now 2026-10-01 --json
 ```
+
+The package is not currently published to npm. Install it from GitHub with `npm install --global github:b69ca/har-sunset-audit` if you prefer the shorter `har-sunset-audit` command.
 
 The audit recognizes the standard `Deprecation` response header and `deprecation` link relation from [RFC 9745](https://www.rfc-editor.org/rfc/rfc9745.html), plus `Sunset` and `sunset` links from [RFC 8594](https://www.rfc-editor.org/rfc/rfc8594.html). It also recognizes `successor-version` links, checks date ordering, deduplicates repeated requests, and grades sunsets inside 90 or 30 days. Exit code 1 means an endpoint is already sunset or within 30 days.
 
